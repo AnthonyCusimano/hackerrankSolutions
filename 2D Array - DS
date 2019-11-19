@@ -1,0 +1,118 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+// Complete the hourglassSum function below.
+int hourglassSum(vector<vector<int>> arr) {
+
+    int T_Return = -1000000;
+
+    //I have no doubt there's a better way to do this lol
+    //but if nothing else, this is readable
+    int T_hourglasses[16];
+
+    for (int i = 0; i < 16; ++i){
+
+        T_hourglasses[i] = 0;
+
+    }
+
+    //[1][1]
+    T_hourglasses[0] = arr[0][0] + arr[0][1] + arr[0][2] + arr[1][1] + 
+        arr[2][0] + arr[2][1] + arr[2][2];
+
+    //[1][2]
+    T_hourglasses[1] = arr[0][1] + arr[0][2] + arr[0][3] + arr[1][2] +
+        arr[2][1] + arr[2][2] + arr[2][3];
+
+    //[1][3]
+    T_hourglasses[2] = arr[0][2] + arr[0][3] + arr[0][4] + arr[1][3] +
+        arr[2][2] + arr[2][3] + arr[2][4];
+
+    //[1][4]
+    T_hourglasses[3] = arr[0][3] + arr[0][4] + arr[0][5] + arr[1][4] +
+        arr[2][3] + arr[2][4] + arr[2][5];
+
+    //[2][1]
+    T_hourglasses[4] = arr[1][0] + arr[1][1] + arr[1][2] + arr[2][1] +
+        arr[3][0] + arr[3][1] + arr[3][2];
+
+    //22
+    T_hourglasses[5] = arr[1][1] + arr[1][2] + arr[1][3] + arr[2][2] +
+        arr[3][1] + arr[3][2] + arr[3][3];
+
+    //23
+    T_hourglasses[6] = arr[1][2] + arr[1][3] + arr[1][4] + arr[2][3] +
+        arr[3][2] + arr[3][3] + arr[3][4];
+
+    //24
+    T_hourglasses[7] = arr[1][3] + arr[1][4] + arr[1][5] + arr[2][4] +
+        arr[3][3] + arr[3][4] + arr[3][5];
+
+    //31
+    T_hourglasses[8] = arr[2][0] + arr[2][1] + arr[2][2] + arr[3][1] +
+        arr[4][0] + arr[4][1] + arr[4][2];
+
+
+    //32
+    T_hourglasses[9] = arr[2][1] + arr[2][2] + arr[2][3] + arr[3][2] +
+        arr[4][1] + arr[4][2] + arr[4][3];
+
+    //33
+    T_hourglasses[10] = arr[2][2] + arr[2][3] + arr[2][4] + arr[3][3] +
+        arr[4][2] + arr[4][3] + arr[4][4];
+
+    //34
+    T_hourglasses[11] = arr[2][3] + arr[2][4] + arr[2][5] + arr[3][4] +
+        arr[4][3] + arr[4][4] + arr[4][5];
+
+
+    //41
+    T_hourglasses[12] = arr[3][0] + arr[3][1] + arr[3][2] + arr[4][1] +
+        arr[5][0] + arr[5][1] + arr[5][2];
+
+    //42
+    T_hourglasses[13] = arr[3][1] + arr[3][2] + arr[3][3] + arr[4][2] +
+        arr[5][1] + arr[5][2] + arr[5][3];
+
+    //43
+    T_hourglasses[14] = arr[3][2] + arr[3][3] + arr[3][4] + arr[4][3] +
+        arr[5][2] + arr[5][3] + arr[5][4];
+
+    //44
+    T_hourglasses[15] = arr[3][3] + arr[3][4] + arr[3][5] + arr[4][4] +
+        arr[5][3] + arr[5][4] + arr[5][5];
+
+    for (int i = 0; i < 16; ++i){
+        if (T_hourglasses[i] > T_Return)
+            T_Return = T_hourglasses[i];
+
+    }
+
+    return T_Return;
+
+}
+
+int main()
+{
+    ofstream fout(getenv("OUTPUT_PATH"));
+
+    vector<vector<int>> arr(6);
+    for (int i = 0; i < 6; i++) {
+        arr[i].resize(6);
+
+        for (int j = 0; j < 6; j++) {
+            cin >> arr[i][j];
+        }
+
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    }
+
+    int result = hourglassSum(arr);
+
+    fout << result << "\n";
+
+    fout.close();
+
+    return 0;
+}
